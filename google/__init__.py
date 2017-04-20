@@ -320,6 +320,7 @@ def search(query, tld='com', lang='en', tbs='0', safe='off', num=10, start=0,
             # Get the URL from the anchor tag.
             try:
                 link = a['href']
+                title = a.get_text()#self add
             except KeyError:
                 continue
 
@@ -335,7 +336,10 @@ def search(query, tld='com', lang='en', tbs='0', safe='off', num=10, start=0,
             hashes.add(h)
 
             # Yield the result.
-            yield link
+            yield link,title
+
+            #if(len(hashes) >= num):
+            #    break
 
         # End if there are no more results.
         if not soup.find(id='nav'):
